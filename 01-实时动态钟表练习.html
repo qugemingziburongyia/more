@@ -1,0 +1,174 @@
+<!DOCTYPE html>
+<html>
+<head lang="en">
+  <meta charset="UTF-8">
+  <title></title>
+  <style>
+    *{
+      margin: 0;
+      padding: 0;
+    }
+    body{
+      background-color: blanchedalmond;
+    }
+    .clock {
+      width: 200px;
+      height: 200px;
+      border-radius:50%;
+      background-color: skyblue;
+      margin: 50px auto;
+      position: relative;
+    }
+
+    /*刻度线*/
+    .line1,.line2,.line3,.line4,.line5,.line6 {
+      width: 4px;
+      height: 100%;
+      background-color: #811201;
+      position: absolute;
+      left: 50%;
+      top: 0;
+      margin-left:-2px;
+    }
+    .line2 {
+      background-color: red;
+      transform:rotate(30deg);
+    }
+    .line3 {
+      background-color: green;
+      transform:rotate(60deg);
+    }
+    .line4 {
+      background-color: yellow;
+      transform:rotate(90deg);
+    }
+    .line5 {
+      background-color: blue;
+      transform:rotate(120deg);
+    }
+    .line6 {
+      background-color: hotpink;
+      transform:rotate(150deg);
+    }
+
+    /*遮挡*/
+    .dang{
+      width: 150px;
+      height: 150px;
+      background-color: skyblue;
+      position: absolute;
+      left: 25px;
+      top: 25px;
+      border-radius:50%;
+    }
+
+    /*时针*/
+    .second{
+      width:6px;
+      height: 80px;
+      background-color: #ccc;
+      position: absolute;
+      left: 50%;
+      margin-left:-3px;
+      top:20px;
+      transform-origin:bottom;
+      /*animation:rot 60s steps(60) infinite;*/
+    }
+    .minute{
+      width:4px;
+      height: 60px;
+      background-color: red;
+      position: absolute;
+      left: 50%;
+      margin-left:-2px;
+      top:40px;
+      transform-origin:bottom;
+      /*animation:rot 3600s steps(60) infinite;*/
+    }
+    .hour{
+      width:4px;
+      height: 40px;
+      background-color:yellow;
+      position: absolute;
+      left: 50%;
+      margin-left:-2px;
+      top:60px;
+      transform-origin:bottom;
+      /*animation:rot 43200s steps(60) infinite;*/
+    }
+
+    /*小圆点*/
+    .dot{
+      width: 20px;
+      height: 20px;
+      border-radius:50%;
+      background-color: red;
+      position: absolute;
+      left: 50%;
+      top: 50%;
+      transform:translate(-10px,-10px);
+    }
+    /*@keyframes rot {*/
+      /*0% {*/
+        /*transform:rotate(0deg);*/
+      /*}*/
+      /*100% {*/
+        /*transform:rotate(360deg);*/
+      /*}*/
+    /*}*/
+  </style>
+</head>
+<body>
+  <div class="clock">
+
+    <!--刻度-->
+    <div class="line1"></div>
+    <div class="line2"></div>
+    <div class="line3"></div>
+    <div class="line4"></div>
+    <div class="line5"></div>
+    <div class="line6"></div>
+
+    <!--遮挡div-->
+    <div class="dang"></div>
+
+    <!--时针-->
+    <div class="hour"></div>
+    <div class="minute"></div>
+    <div class="second"></div>
+    <!--小圆点-->
+    <div class="dot"></div>
+
+  </div>
+  <script src="./jquery.min.js"></script>
+  <script>
+    $(function() {
+      function toDraw () {
+        var date = new Date();
+        var time = +date;
+        var times = parseInt(time / 1000);
+        console.log(time);
+        console.log(times);
+        //当前小时
+        var hours =  parseInt(times/60/60)%24 + 8;
+        console.log(hours);
+        var minutes = parseInt(times/60)%60;
+        console.log(minutes);
+        var seconds = (times) % 60;
+        console.log(seconds);
+        var hour = document.querySelector('.hour');
+        var minute = document.querySelector('.minute');
+        var second = document.querySelector('.second');
+        hour.style.transform = 'rotate('+hours*30+'deg';
+        minute.style.transform = 'rotate('+minutes * 6+'deg';
+        second.style.transform = 'rotate('+ seconds * 6 + 'deg';
+      }
+
+      setInterval(toDraw,1000);
+      toDraw();
+    })
+
+
+  </script>
+</body>
+</html>
